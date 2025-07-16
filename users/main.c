@@ -15,6 +15,11 @@
   */
 /* Includes ------------------------------------------------------------------*/
 #include "board.h"
+#include <stdio.h>
+
+#if USING_RTOS
+    #include "cmsis_os2.h"
+#endif
 
 /* Private typedef -----------------------------------------------------------*/
 
@@ -45,10 +50,13 @@ int main(void)
     
     /* 检查HAL版本 */
     if (HAL_GetHalVersion() != STM32_HAL_SW_VERSION) {
-//        LOG_D("HAL version mismatch: expected 0x%08X, got 0x%08X\r\n", 
-//              STM32_HAL_SW_VERSION, HAL_GetHalVersion());
+        printf("HAL version mismatch: expected 0x%08X, got 0x%08X\r\n", 
+              STM32_HAL_SW_VERSION, HAL_GetHalVersion());
         while (1);
     }
+    
+    osKernelInitialize();               // Initialize CMSIS-RTOS
+    osKernelStart();                    // Start thread execution
     
     while(1)
     {

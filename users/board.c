@@ -20,6 +20,8 @@
 #include "stm32_clk.h"
 
 #include "led_gpio.h"
+
+#include <stdio.h>
 /* Private typedef -----------------------------------------------------------*/
 
 /* Private define ------------------------------------------------------------*/
@@ -27,10 +29,37 @@
 /* Private macro -------------------------------------------------------------*/
 
 /* Private variables ---------------------------------------------------------*/
+DEFINE_GPIO_LED(red_led, "PB.0", 1, LED_OFF, LED_FULL);
+DEFINE_GPIO_LED(green_led, "PB.1", 1, LED_OFF, LED_FULL);
 
 /* Exported variables  -------------------------------------------------------*/
 
 /* Private function prototypes -----------------------------------------------*/
+static int gpio_led_static_init(void)
+{
+    int ret;
+    
+    /* 初始化GPIO LED子系统 */
+    ret = gpio_led_init();
+    if (ret != 0) {
+        printf("Failed to initialize GPIO LED subsystem: %d\n", ret);
+        return ret;
+    }
+    
+    /* 注册LED */
+    ret = gpio_led_register(&red_led);
+    if (ret != 0) {
+        printf("Failed to register red LED: %d\n", ret);
+        return ret;
+    }
+    ret = gpio_led_register(&green_led);
+    if (ret != 0) {
+        printf("Failed to register green LED: %d\n", ret);
+        return ret;
+    }
+    
+    return 0;
+}
 
 /* Exported functions --------------------------------------------------------*/
 
@@ -55,7 +84,10 @@ int board_init(void)
         while(1);
     }
     
-    
+    ret = gpio_led_static_init();
+    if (ret != 0) {
+        while(1);
+    }
     
     return 0;
 }
