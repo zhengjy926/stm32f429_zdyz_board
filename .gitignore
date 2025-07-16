@@ -1,0 +1,12 @@
+*.d
+*.o
+*.crf
+*.htm
+*.lnp
+*.sct
+*.andromeda
+*.dep
+*.Bak
+*.map
+*.axf
+*.hex

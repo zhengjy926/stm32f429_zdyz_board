@@ -1,0 +1,18 @@
+[submodule "utilities"]
+	path = utilities
+	url = https://github.com/zhengjy926/utilities.git
+[submodule "devices"]
+	path = devices
+	url = https://github.com/zhengjy926/devices.git
+[submodule "drivers/bsp"]
+	path = drivers/bsp
+	url = https://github.com/zhengjy926/bsp.git
+[submodule "drivers/stm32f4xx-hal-driver"]
+	path = drivers/stm32f4xx-hal-driver
+	url = https://github.com/STMicroelectronics/stm32f4xx-hal-driver.git
+[submodule "drivers/cmsis-device-f4"]
+	path = drivers/cmsis-device-f4
+	url = https://github.com/STMicroelectronics/cmsis-device-f4.git
+[submodule "drivers/CMSIS_6"]
+	path = drivers/CMSIS_6
+	url = https://github.com/ARM-software/CMSIS_6.git
